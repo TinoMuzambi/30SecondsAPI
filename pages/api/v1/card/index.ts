@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import cards from "../../../../data/cards";
+import { Card } from "../../../../interfaces";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const {
@@ -15,9 +17,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				: 5;
 			const difficultyParam = (difficulty as string) ? difficulty : "default";
 
+			const cardsData: Card[] = [...cards];
+
 			res.status(200).json({
 				success: "true",
-				data: { categoryParam, noItemsPerCardParam, difficultyParam },
+				data: { cardsData },
 			});
 			break;
 		default:
