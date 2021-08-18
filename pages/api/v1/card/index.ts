@@ -8,11 +8,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	switch (method) {
 		case "GET":
-			const categoryParam = category as string | "all";
+			const categoryParam = (category as string) ? difficulty : "all";
 			const itemsPerCardParam = Number.parseInt(itemsPerCard as string) | 5;
-			const difficultyParam = difficulty as
-				| ("easy" | "medium" | "hard")
-				| "default";
+			const difficultyParam = (difficulty as string) ? difficulty : "default";
 			res.status(200).json({
 				success: "true",
 				data: { categoryParam, itemsPerCardParam, difficultyParam },
