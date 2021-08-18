@@ -9,3 +9,4 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Allow for specifying a difficulty level for cards.
 - All cards should be unique.
 - Need LOTS of data.
+- Single endpoint with query params.
