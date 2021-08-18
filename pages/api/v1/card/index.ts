@@ -10,9 +10,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		case "GET":
 			res.status(200).json({
 				success: "true",
-				data: { category },
+				data: { cat: category },
 			});
-
+			break;
 		default:
 			return res.status(400).json({ success: false });
 	}
