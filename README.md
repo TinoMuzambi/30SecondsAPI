@@ -10,3 +10,4 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - All cards should be unique.
 - Need LOTS of data.
 - Single endpoint with query params.
+- Use DB or local file?
