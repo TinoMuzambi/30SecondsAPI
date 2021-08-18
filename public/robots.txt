@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: https://30-seconds-api.vercel.app/sitemap.xml
