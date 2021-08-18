@@ -11,7 +11,7 @@ export enum DIFFICULTIES {
 }
 
 export interface Item {
-	id: number;
+	id: string;
 	difficulty: DIFFICULTIES;
 	category: CATEGORIES[];
 	content: string;
@@ -19,7 +19,7 @@ export interface Item {
 }
 
 export interface Card {
-	id: number;
+	id: string;
 	difficulty: DIFFICULTIES[];
 	category: CATEGORIES[];
 	noItems: number;

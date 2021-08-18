@@ -2,7 +2,7 @@ import { Card, Item, CATEGORIES, DIFFICULTIES } from "../interfaces";
 
 const cards: Card[] = [
 	{
-		id: 1,
+		id: uuidv4(),
 		category: [CATEGORIES.cars],
 		difficulty: [DIFFICULTIES.default],
 		items: [],
