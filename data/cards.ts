@@ -14,7 +14,9 @@ const cards: Card[] = [
 				clue: "Fork Logo",
 			},
 		],
-		noItems: 5,
+		noItems: (function () {
+			return (this as any).items.length;
+		})(),
 	},
 ];
 
