@@ -1,6 +1,6 @@
 import { Card, CATEGORIES, DIFFICULTIES } from "../interfaces";
 
-export const cards: Card[] = [
+const cards: Card[] = [
 	{
 		id: 1,
 		category: [CATEGORIES.cars],
@@ -17,3 +17,5 @@ export const cards: Card[] = [
 		noItems: 5,
 	},
 ];
+
+export default cards;
