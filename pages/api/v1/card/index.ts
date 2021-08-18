@@ -14,8 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				? Number.parseInt(noItemsPerCard as string)
 				: 5;
 			const difficultyParam = (difficulty as string) ? difficulty : "default";
-			console.log(noItemsPerCard);
-			console.log(noItemsPerCardParam);
+
 			res.status(200).json({
 				success: "true",
 				data: { categoryParam, noItemsPerCardParam, difficultyParam },
