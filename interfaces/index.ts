@@ -12,6 +12,7 @@ export enum DIFFICULTY {
 }
 
 export interface Item {
+	_id: string;
 	id: string;
 	difficulty: DIFFICULTY;
 	categories: CATEGORY[];
