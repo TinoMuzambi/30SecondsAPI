@@ -1,63 +1,31 @@
 import mongoose, { Schema } from "mongoose";
 
-import { Item } from "../interfaces";
+import { CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
 const ItemSchema: Schema = new mongoose.Schema(
 	{
 		id: {
 			type: String,
-			required: [true, "Comment needs an ID."],
+			required: [true, "Item needs an ID."],
 			trim: true,
+			unique: [true, "Item ID needs to be unique."],
 		},
-		videoId: {
+		difficulty: {
+			type: DIFFICULTY,
+			required: [true, "Item needs a difficulty"],
+		},
+		categories: {
+			type: [CATEGORY],
+			required: [true, "Item needs at least one category."],
+		},
+		content: {
 			type: String,
-			required: [true, "Comment needs a video ID."],
-			trim: true,
+			required: [true, "Item needs content."],
+			unique: [true, "Item content needs to be unique."],
 		},
-		authorId: {
+		clue: {
 			type: String,
-			required: [true, "Comment needs an author ID"],
-			trim: true,
-		},
-		email: {
-			type: String,
-			required: [true, "Comment needs an email"],
-			trim: true,
-		},
-		comment: {
-			type: String,
-			required: [true, "Comment needs comment text."],
-		},
-		name: {
-			type: String,
-			required: [true, "Comment needs a name"],
-			trim: true,
-		},
-		image: {
-			type: String,
-			trim: true,
-			default:
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSisT6Nb6XIXyX7kQ9XmEMID6eSxl4mQ8E0vXbwc77pJqhZYUUdU13h7VRlt4rZqOgg5Yc&usqp=CAU",
-		},
-		upvotes: {
-			type: Number,
-			default: 0,
-		},
-		downvotes: {
-			type: Number,
-			default: 0,
-		},
-		mention: {
-			type: String || null,
-			default: null,
-		},
-		replies: {
-			type: [this],
-		},
-		edited: {
-			type: Boolean,
-			required: [true, "Comment needs edited value."],
-			default: false,
+			required: [true, "Item needs a clue"],
 		},
 	},
 	{
