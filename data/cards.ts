@@ -1,10 +1,10 @@
-import { Card, Item, CATEGORIES, DIFFICULTIES } from "../interfaces";
+import { Card, Item, CATEGORY, DIFFICULTY } from "../interfaces";
 
 const cards: Card[] = [
 	{
 		id: uuidv4(),
-		category: [CATEGORIES.cars],
-		difficulty: [DIFFICULTIES.default],
+		category: [CATEGORY.cars],
+		difficulty: [DIFFICULTY.default],
 		items: [],
 		get noItems() {
 			return (<any>this).items.length;

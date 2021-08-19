@@ -1,26 +1,26 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { CATEGORIES, DIFFICULTIES, Item } from "../interfaces";
+import { CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
 const items: Item[] = [
 	{
 		id: uuidv4(),
-		category: [CATEGORIES.cars],
-		difficulty: DIFFICULTIES.default,
+		category: [CATEGORY.cars],
+		difficulty: DIFFICULTY.standard,
 		content: "Maserati",
 		clue: "Fork Logo",
 	},
 	{
 		id: uuidv4(),
-		category: [CATEGORIES.cars],
-		difficulty: DIFFICULTIES.default,
+		category: [CATEGORY.cars],
+		difficulty: DIFFICULTY.standard,
 		content: "Ferrari",
 		clue: "Red horse",
 	},
 	{
 		id: uuidv4(),
-		category: [CATEGORIES.cars],
-		difficulty: DIFFICULTIES.default,
+		category: [CATEGORY.cars],
+		difficulty: DIFFICULTY.standard,
 		content: "Bugatti",
 		clue: "Very fast",
 	},

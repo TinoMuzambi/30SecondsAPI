@@ -1,10 +1,10 @@
-export enum CATEGORIES {
+export enum CATEGORY {
 	cars = "cars",
 	tech = "tech",
 	all = "all",
 }
 
-export enum DIFFICULTIES {
+export enum DIFFICULTY {
 	easy = "easy",
 	medium = "medium",
 	hard = "hard",
@@ -13,16 +13,16 @@ export enum DIFFICULTIES {
 
 export interface Item {
 	id: string;
-	difficulty: DIFFICULTIES;
-	category: CATEGORIES[];
+	difficulty: DIFFICULTY;
+	category: CATEGORY[];
 	content: string;
 	clue: string;
 }
 
 export interface Card {
 	id: string;
-	difficulties: DIFFICULTIES[];
-	categories: CATEGORIES[];
+	difficulties: DIFFICULTY[];
+	categories: CATEGORY[];
 	noItems: number;
 	items: Item[];
 }

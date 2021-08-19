@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import items from "../data/items";
-import { Card, CATEGORIES, DIFFICULTIES, Item } from "../interfaces";
+import { Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
 // Return true if there is an intersection, else false.
 export const intersection = (array1: any[], array2: any[]): boolean => {
@@ -11,8 +11,8 @@ export const intersection = (array1: any[], array2: any[]): boolean => {
 // Get items that match number of items, difficulty and category.
 export const getItems = (
 	noItems: number,
-	categories: CATEGORIES[],
-	difficulties: DIFFICULTIES[]
+	categories: CATEGORY[],
+	difficulties: DIFFICULTY[]
 ): Item[] => {
 	let cardItems: Item[] = [];
 
@@ -33,8 +33,8 @@ export const getItems = (
 // Get a card that matches number of items, difficulty and category.
 export const getCard = (
 	noItems: number,
-	categories: CATEGORIES[],
-	difficulties: DIFFICULTIES[]
+	categories: CATEGORY[],
+	difficulties: DIFFICULTY[]
 ): Card => {
 	const cardItems = getItems(noItems, categories, difficulties);
 	const card: Card = {
