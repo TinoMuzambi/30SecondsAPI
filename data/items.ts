@@ -6,7 +6,7 @@ const items: Item[] = [
 	{
 		id: uuidv4(),
 		categories: [CATEGORY.cars],
-		difficulty: DIFFICULTY.all,
+		difficulty: DIFFICULTY.medium,
 		content: "Maserati",
 		clue: "Fork Logo",
 	},
@@ -20,7 +20,7 @@ const items: Item[] = [
 	{
 		id: uuidv4(),
 		categories: [CATEGORY.cars],
-		difficulty: DIFFICULTY.all,
+		difficulty: DIFFICULTY.medium,
 		content: "Bugatti",
 		clue: "Very fast",
 	},
