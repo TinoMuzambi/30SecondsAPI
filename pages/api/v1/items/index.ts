@@ -26,6 +26,17 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 				res.status(400).json({ success: "false", data: error });
 			}
 			break;
+		case "PUT":
+			try {
+				const item: typeof Item = await Item.findByIdAndUpdate(
+					req.body._id,
+					req.body
+				);
+
+				res.status(201).json({ success: "true", data: item });
+			} catch (error) {
+				res.status(400).json({ success: "false", data: error });
+			}
 		default:
 			return res.status(400).json({ success: false });
 	}
