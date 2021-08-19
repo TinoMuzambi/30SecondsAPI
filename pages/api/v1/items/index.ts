@@ -37,6 +37,7 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 			} catch (error) {
 				res.status(400).json({ success: "false", data: error });
 			}
+			break;
 		default:
 			return res.status(400).json({ success: false });
 	}
