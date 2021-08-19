@@ -8,6 +8,17 @@ export const intersection = (array1: any[], array2: any[]): any[] => {
 	return array1.filter((value) => array2.includes(value));
 };
 
+// Return true if item is already in list, else false.
+export const isInList = (item: Item, items: Item[]): boolean => {
+	let res = false;
+
+	items.forEach((i) => {
+		if (i.id === item.id) res = true;
+	});
+
+	return res;
+};
+
 // Get items that match number of items, difficulty and category.
 export const getItems = (
 	noItems: number,
@@ -16,11 +27,20 @@ export const getItems = (
 ): Item[] => {
 	let cardItems: Item[] = [];
 
+	// Generate lists to facilitate checking requirements.
+	// List of all categories.
 	const itemCategories = items.map((i) => i.categories.join(","));
-	const itemDiffs: Item[] = items.filter((i) =>
-		difficulties.includes(i.difficulty)
-	);
-	const itemDifficulties: string[] = itemDiffs.map((i) => i.difficulty);
+
+	// List of difficulties that match requirements.
+	let itemDifficulties: string[];
+	if (difficulties[0] === DIFFICULTY.all) {
+		itemDifficulties = items.map((i) => i.difficulty);
+	} else {
+		const itemDiffs: Item[] = items.filter((i) =>
+			difficulties.includes(i.difficulty)
+		);
+		itemDifficulties = itemDiffs.map((i) => i.difficulty);
+	}
 
 	// First check if a list matching the requirements can be generated.
 	if (
@@ -40,7 +60,9 @@ export const getItems = (
 				(difficulties.includes(currItem.difficulty) ||
 					difficulties[0] === DIFFICULTY.all)
 			) {
-				cardItems.push(currItem);
+				if (!isInList(currItem, cardItems)) {
+					cardItems.push(currItem);
+				}
 			}
 		}
 	}
