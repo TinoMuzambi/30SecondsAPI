@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Item from "../../../../models/Item";
 import db from "../../../../utils/dbConnect";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	db();
 	const { method } = req;
 
@@ -30,3 +30,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.status(400).json({ success: false });
 	}
 };
+
+export default res;
