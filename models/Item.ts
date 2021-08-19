@@ -14,20 +14,24 @@ const ItemSchema: Schema = new mongoose.Schema(
 			type: String,
 			enum: DIFFICULTY,
 			required: [true, "Item needs a difficulty"],
+			trim: true,
 		},
 		categories: {
 			type: [String],
 			enum: CATEGORY,
 			required: [true, "Item needs at least one category."],
+			trim: true,
 		},
 		content: {
 			type: String,
 			required: [true, "Item needs content."],
 			unique: [true, "Item content needs to be unique."],
+			trim: true,
 		},
 		clue: {
 			type: String,
 			required: [true, "Item needs a clue"],
+			trim: true,
 		},
 	},
 	{
