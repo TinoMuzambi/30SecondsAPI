@@ -36,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			else if (noItemsPerCardParam < 1) noItemsPerCardParam = 5;
 
 			// Generate card.
-			const card: Card = getCard(
+			const card: Card = await getCard(
 				noItemsPerCardParam,
 				finalCategoryParam as CATEGORY[],
 				finalDifficultyParam as DIFFICULTY[]
