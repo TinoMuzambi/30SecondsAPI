@@ -1,14 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from "uuid";
 
-import cards from "../../../../data/cards";
 import items from "../../../../data/items";
 import { Card, CATEGORIES, DIFFICULTIES, Item } from "../../../../interfaces";
 import { intersection } from "../../../../utils";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	// Get items that match number of items and category.
-	const getItems = (noItems: number, categories: CATEGORIES[]): Item[] => {
+	const getItems = (
+		noItems: number,
+		categories: CATEGORIES[],
+		difficulty: DIFFICULTIES[]
+	): Item[] => {
 		let cardItems: Item[] = [];
 
 		while (cardItems.length < noItems) {
@@ -24,12 +27,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 		return cardItems;
 	};
+
 	const getCard = (
 		noItems: number,
 		categories: CATEGORIES[],
 		difficulty: DIFFICULTIES[]
 	): Card => {
-		const cardItems = getItems(noItems, categories);
+		const cardItems = getItems(noItems, categories, difficulty);
 		const card: Card = {
 			id: uuidv4(),
 			category: categories,
