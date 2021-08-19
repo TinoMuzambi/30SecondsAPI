@@ -17,19 +17,24 @@ export const getItems = (
 	let cardItems: Item[] = [];
 
 	const itemCategories = items.map((i) => i.categories.join(","));
+	const itemDifficulties = items.filter((i) =>
+		difficulties.includes(i.difficulty)
+	);
 
 	if (
-		intersection(itemCategories, categories).length >= noItems ||
-		categories[0] === CATEGORY.all
+		(intersection(itemCategories, categories).length >= noItems ||
+			categories[0] === CATEGORY.all) &&
+		itemDifficulties.length >= noItems
 	) {
 		while (cardItems.length < noItems) {
 			const rand = Math.floor(Math.random() * items.length);
 			const currItem = items[rand];
 
 			if (
-				intersection(categories, currItem.categories) !== [] ||
-				(categories[0] === CATEGORY.all &&
-					difficulties.includes(currItem.difficulty))
+				(intersection(categories, currItem.categories) !== [] ||
+					categories[0] === CATEGORY.all) &&
+				(difficulties.includes(currItem.difficulty) ||
+					difficulties[0] === DIFFICULTY.standard)
 			) {
 				cardItems.push(currItem);
 			}
