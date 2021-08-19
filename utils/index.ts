@@ -16,7 +16,11 @@ export const getItems = (
 ): Item[] => {
 	let cardItems: Item[] = [];
 
-	if (intersection.length >= noItems) {
+	let itemCategories = items.map((i) => i.categories.join(","));
+	itemCategories = Array.from(new Set(itemCategories));
+
+	if (intersection(categories, itemCategories).length >= noItems) {
+		console.log("here");
 		while (cardItems.length < noItems) {
 			const rand = Math.floor(Math.random() * items.length);
 			const currItem = items[rand];
@@ -29,6 +33,7 @@ export const getItems = (
 			}
 		}
 	}
+
 	return cardItems;
 };
 
