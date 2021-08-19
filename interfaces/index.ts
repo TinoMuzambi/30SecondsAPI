@@ -1,6 +1,7 @@
 export enum CATEGORIES {
 	cars = "cars",
 	tech = "tech",
+	all = "all",
 }
 
 export enum DIFFICULTIES {
