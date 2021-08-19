@@ -11,11 +11,13 @@ const ItemSchema: Schema = new mongoose.Schema(
 			unique: [true, "Item ID needs to be unique."],
 		},
 		difficulty: {
-			type: DIFFICULTY,
+			type: String,
+			enum: DIFFICULTY,
 			required: [true, "Item needs a difficulty"],
 		},
 		categories: {
-			type: [CATEGORY],
+			type: [String],
+			enum: CATEGORY,
 			required: [true, "Item needs at least one category."],
 		},
 		content: {
