@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import items from "../data/items";
 import { Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
-// Return true if there is an intersection between two arrays, else false.
+// Return the intersection between two arrays.
 export const intersection = (array1: any[], array2: any[]): any[] => {
 	return array1.filter((value) => array2.includes(value));
 };
@@ -21,15 +21,18 @@ export const getItems = (
 		difficulties.includes(i.difficulty)
 	);
 
+	// First check if a list matching the requirements can be generated.
 	if (
 		(intersection(itemCategories, categories).length >= noItems ||
 			categories[0] === CATEGORY.all) &&
 		itemDifficulties.length >= noItems
 	) {
+		// While items less than requested number of items.
 		while (cardItems.length < noItems) {
 			const rand = Math.floor(Math.random() * items.length);
 			const currItem = items[rand];
 
+			// If item matches requiremenets, push it to the list.
 			if (
 				(intersection(categories, currItem.categories) !== [] ||
 					categories[0] === CATEGORY.all) &&
@@ -50,7 +53,10 @@ export const getCard = (
 	categories: CATEGORY[],
 	difficulties: DIFFICULTY[]
 ): Card => {
+	// Get card items.
 	const cardItems = getItems(noItems, categories, difficulties);
+
+	// Generate card.
 	const card: Card = {
 		id: uuidv4(),
 		categories: categories,
