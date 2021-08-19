@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Card, CATEGORY, DIFFICULTY } from "../../../../interfaces";
 import { getCard } from "../../../../utils";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	const {
 		method,
 		query: { category, noItemsPerCard, difficulty },
@@ -36,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			else if (noItemsPerCardParam < 1) noItemsPerCardParam = 5;
 
 			// Generate card.
-			const card: Card = getCard(
+			const card: Card = await getCard(
 				noItemsPerCardParam,
 				finalCategoryParam as CATEGORY[],
 				finalDifficultyParam as DIFFICULTY[]
@@ -51,3 +51,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.status(400).json({ success: false });
 	}
 };
+
+export default res;

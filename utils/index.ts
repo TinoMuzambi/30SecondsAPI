@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import items from "../data/items";
-import { Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
+import { BASE_URL, Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
 // Return the intersection between two arrays.
 export const intersection = (array1: any[], array2: any[]): any[] => {
@@ -19,12 +18,25 @@ export const isInList = (item: Item, items: Item[]): boolean => {
 	return res;
 };
 
+// Get items from database.
+export const getItemsFromDB = async (): Promise<Item[]> => {
+	const res = await fetch(`${BASE_URL}/api/v1/items`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	const data = await res.json();
+
+	return data.data;
+};
+
 // Get items that match number of items, difficulty and category.
-export const getItems = (
+export const getItems = async (
 	noItems: number,
 	categories: CATEGORY[],
 	difficulties: DIFFICULTY[]
-): Item[] => {
+): Promise<Item[]> => {
+	const items: Item[] = await getItemsFromDB();
 	let cardItems: Item[] = [];
 
 	// Generate lists to facilitate checking requirements.
@@ -71,13 +83,13 @@ export const getItems = (
 };
 
 // Get a card that matches number of items, difficulty and category.
-export const getCard = (
+export const getCard = async (
 	noItems: number,
 	categories: CATEGORY[],
 	difficulties: DIFFICULTY[]
-): Card => {
+): Promise<Card> => {
 	// Get card items.
-	const cardItems = getItems(noItems, categories, difficulties);
+	const cardItems = await getItems(noItems, categories, difficulties);
 
 	// Generate card.
 	const card: Card = {

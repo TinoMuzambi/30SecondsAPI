@@ -5,6 +5,7 @@ import { CATEGORY, DIFFICULTY, Item } from "../interfaces";
 const items: Item[] = [
 	{
 		id: uuidv4(),
+		_id: uuidv4(),
 		categories: [CATEGORY.cars],
 		difficulty: DIFFICULTY.medium,
 		content: "Maserati",
@@ -12,6 +13,7 @@ const items: Item[] = [
 	},
 	{
 		id: uuidv4(),
+		_id: uuidv4(),
 		categories: [CATEGORY.cars],
 		difficulty: DIFFICULTY.hard,
 		content: "Ferrari",
@@ -19,6 +21,7 @@ const items: Item[] = [
 	},
 	{
 		id: uuidv4(),
+		_id: uuidv4(),
 		categories: [CATEGORY.cars],
 		difficulty: DIFFICULTY.medium,
 		content: "Bugatti",
@@ -26,6 +29,7 @@ const items: Item[] = [
 	},
 	{
 		id: uuidv4(),
+		_id: uuidv4(),
 		categories: [CATEGORY.cars],
 		difficulty: DIFFICULTY.easy,
 		content: "Lamborghini",
