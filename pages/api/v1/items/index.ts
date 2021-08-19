@@ -28,8 +28,8 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 			break;
 		case "PUT":
 			try {
-				const item: typeof Item = await Item.findByIdAndUpdate(
-					req.body._id,
+				const item: typeof Item = await Item.findOneAndUpdate(
+					{ id: req.body.id },
 					req.body
 				);
 
