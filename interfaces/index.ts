@@ -11,6 +11,11 @@ export enum DIFFICULTY {
 	all = "all",
 }
 
+export const BASE_URL =
+	process.env.NODE_ENV === "production"
+		? "https://30-seconds-api.vercel.app"
+		: "http://localhost:3000";
+
 export interface Item {
 	_id: string;
 	id: string;
