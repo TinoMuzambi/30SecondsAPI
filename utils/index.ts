@@ -20,13 +20,12 @@ export const getItems = (
 	itemCategories = Array.from(new Set(itemCategories));
 
 	if (intersection(categories, itemCategories).length >= noItems) {
-		console.log("here");
 		while (cardItems.length < noItems) {
 			const rand = Math.floor(Math.random() * items.length);
 			const currItem = items[rand];
 
 			if (
-				intersection(categories, currItem.categories) === [] &&
+				intersection(categories, currItem.categories) !== [] &&
 				difficulties.includes(currItem.difficulty)
 			) {
 				cardItems.push(currItem);
