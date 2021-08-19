@@ -10,18 +10,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (method) {
 		case "GET":
 			try {
-				const careers: typeof Item[] = await Item.find({});
+				const items: typeof Item[] = await Item.find({});
 
-				res.status(200).json({ success: "true", data: careers });
+				res.status(200).json({ success: "true", data: items });
 			} catch (error) {
 				res.status(400).json({ success: "false", data: error });
 			}
 			break;
 		case "POST":
 			try {
-				const career: typeof Item = await Item.create(req.body);
+				const item: typeof Item = await Item.create(req.body);
 
-				res.status(201).json({ success: "true", data: career });
+				res.status(201).json({ success: "true", data: item });
 			} catch (error) {
 				res.status(400).json({ success: "false", data: error });
 			}
