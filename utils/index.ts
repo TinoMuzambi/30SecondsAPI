@@ -18,14 +18,18 @@ export const getItems = (
 
 	const itemCategories = items.map((i) => i.categories.join(","));
 
-	if (intersection(itemCategories, categories).length >= noItems) {
+	if (
+		intersection(itemCategories, categories).length >= noItems ||
+		categories[0] === CATEGORY.all
+	) {
 		while (cardItems.length < noItems) {
 			const rand = Math.floor(Math.random() * items.length);
 			const currItem = items[rand];
 
 			if (
-				intersection(categories, currItem.categories) !== [] &&
-				difficulties.includes(currItem.difficulty)
+				intersection(categories, currItem.categories) !== [] ||
+				(categories[0] === CATEGORY.all &&
+					difficulties.includes(currItem.difficulty))
 			) {
 				cardItems.push(currItem);
 			}
