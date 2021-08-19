@@ -5,21 +5,21 @@ import { CATEGORY, DIFFICULTY, Item } from "../interfaces";
 const items: Item[] = [
 	{
 		id: uuidv4(),
-		category: [CATEGORY.cars],
+		categories: [CATEGORY.cars],
 		difficulty: DIFFICULTY.standard,
 		content: "Maserati",
 		clue: "Fork Logo",
 	},
 	{
 		id: uuidv4(),
-		category: [CATEGORY.cars],
+		categories: [CATEGORY.cars],
 		difficulty: DIFFICULTY.standard,
 		content: "Ferrari",
 		clue: "Red horse",
 	},
 	{
 		id: uuidv4(),
-		category: [CATEGORY.cars],
+		categories: [CATEGORY.cars],
 		difficulty: DIFFICULTY.standard,
 		content: "Bugatti",
 		clue: "Very fast",

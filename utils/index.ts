@@ -20,7 +20,7 @@ export const getItems = (
 		const rand = Math.floor(Math.random() * items.length);
 		const currItem = items[rand];
 		if (
-			intersection(categories, currItem.category) &&
+			intersection(categories, currItem.categories) &&
 			difficulties.includes(currItem.difficulty)
 		) {
 			cardItems.push(currItem);
