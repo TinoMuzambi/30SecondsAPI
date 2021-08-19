@@ -6,7 +6,7 @@ const cards: Card[] = [
 	{
 		id: uuidv4(),
 		categories: [CATEGORY.cars],
-		difficulties: [DIFFICULTY.standard],
+		difficulties: [DIFFICULTY.all],
 		items: [],
 		get noItems() {
 			return (<any>this).items.length;

@@ -37,7 +37,7 @@ export const getItems = (
 				(intersection(categories, currItem.categories) !== [] ||
 					categories[0] === CATEGORY.all) &&
 				(difficulties.includes(currItem.difficulty) ||
-					difficulties[0] === DIFFICULTY.standard)
+					difficulties[0] === DIFFICULTY.all)
 			) {
 				cardItems.push(currItem);
 			}

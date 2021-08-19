@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			let categoryParam = (category as string) ? category : CATEGORY.all;
 			let difficultyParam = (difficulty as string)
 				? difficulty
-				: DIFFICULTY.standard;
+				: DIFFICULTY.all;
 			let noItemsPerCardParam = (noItemsPerCard as string)
 				? Number.parseInt(noItemsPerCard as string)
 				: 5;

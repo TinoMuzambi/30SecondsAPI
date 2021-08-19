@@ -8,7 +8,7 @@ export enum DIFFICULTY {
 	easy = "easy",
 	medium = "medium",
 	hard = "hard",
-	standard = "standard",
+	all = "all",
 }
 
 export interface Item {
