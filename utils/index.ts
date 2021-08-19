@@ -5,7 +5,7 @@ import { Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
 // Return true if there is an intersection, else false.
 export const intersection = (array1: any[], array2: any[]): boolean => {
-	return array1.filter((value) => array2.includes(value)) !== [];
+	return array1.filter((value) => array2.includes(value)) === [];
 };
 
 // Get items that match number of items, difficulty and category.
@@ -19,6 +19,7 @@ export const getItems = (
 	while (cardItems.length < noItems) {
 		const rand = Math.floor(Math.random() * items.length);
 		const currItem = items[rand];
+
 		if (
 			intersection(categories, currItem.categories) &&
 			difficulties.includes(currItem.difficulty)
