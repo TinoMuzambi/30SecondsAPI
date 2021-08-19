@@ -30,6 +30,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					? difficultyParam.split(",")
 					: difficultyParam;
 
+			// Validation
+			// Check that number of items per card isn't out of bounds.
+			if (noItemsPerCardParam > 10) noItemsPerCardParam = 10;
+			else if (noItemsPerCardParam < 1) noItemsPerCardParam = 5;
+
+			// Generate card.
 			const card: Card = getCard(
 				noItemsPerCardParam,
 				finalCategoryParam as CATEGORY[],
