@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { Card } from "../../../../interfaces";
+import { Card, CATEGORY, DIFFICULTY } from "../../../../interfaces";
 import { getCard } from "../../../../utils";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -12,11 +12,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (method) {
 		case "GET":
 			// Initialise query params and check if they exist
-			let categoryParam = (category as string) ? category : "all";
+			let categoryParam = (category as string) ? category : CATEGORY.all;
+			let difficultyParam = (difficulty as string)
+				? difficulty
+				: DIFFICULTY.standard;
 			let noItemsPerCardParam = (noItemsPerCard as string)
 				? Number.parseInt(noItemsPerCard as string)
 				: 5;
-			let difficultyParam = (difficulty as string) ? difficulty : "default";
 
 			const finalCategoryParam: string[] =
 				typeof categoryParam === "string"
