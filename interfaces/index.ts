@@ -21,8 +21,8 @@ export interface Item {
 
 export interface Card {
 	id: string;
-	difficulty: DIFFICULTIES[];
-	category: CATEGORIES[];
+	difficulties: DIFFICULTIES[];
+	categories: CATEGORIES[];
 	noItems: number;
 	items: Item[];
 }

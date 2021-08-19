@@ -19,10 +19,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			let difficultyParam = (difficulty as string) ? difficulty : "default";
 
 			const finalCategoryParam: string[] =
-				typeof categoryParam === "string" ? [categoryParam] : categoryParam;
+				typeof categoryParam === "string"
+					? categoryParam.split(",")
+					: categoryParam;
 			const finalDifficultyParam: string[] =
 				typeof difficultyParam === "string"
-					? [difficultyParam]
+					? difficultyParam.split(",")
 					: difficultyParam;
 
 			const card: Card = getCard(

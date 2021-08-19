@@ -12,7 +12,7 @@ export const intersection = (array1: any[], array2: any[]): boolean => {
 export const getItems = (
 	noItems: number,
 	categories: CATEGORIES[],
-	difficulty: DIFFICULTIES[]
+	difficulties: DIFFICULTIES[]
 ): Item[] => {
 	let cardItems: Item[] = [];
 
@@ -21,7 +21,7 @@ export const getItems = (
 		const currItem = items[rand];
 		if (
 			intersection(categories, currItem.category) &&
-			difficulty.includes(currItem.difficulty)
+			difficulties.includes(currItem.difficulty)
 		) {
 			cardItems.push(currItem);
 		}
@@ -34,13 +34,13 @@ export const getItems = (
 export const getCard = (
 	noItems: number,
 	categories: CATEGORIES[],
-	difficulty: DIFFICULTIES[]
+	difficulties: DIFFICULTIES[]
 ): Card => {
-	const cardItems = getItems(noItems, categories, difficulty);
+	const cardItems = getItems(noItems, categories, difficulties);
 	const card: Card = {
 		id: uuidv4(),
-		category: categories,
-		difficulty: difficulty,
+		categories: categories,
+		difficulties: difficulties,
 		items: cardItems,
 		noItems: cardItems.length,
 	};
