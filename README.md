@@ -11,3 +11,23 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Need LOTS of data.
 - Single endpoint with query params.
 - Use DB or local file?
+
+## Categories
+
+- Cars
+- Celebrities
+- General Knowledge
+- Places
+- Phones
+- Animals
+- Politicians
+- Historians
+- Occupations
+- TV
+- Music
+- Nature (Nsovo says mountains and rivers and oceans and all those stuff and famous lakes and famours rocks)
+- Bible
+- Diseases/Conditions
+- Scientists
+- Science Events (Apollo 11)
+- Natural Disasters Names
