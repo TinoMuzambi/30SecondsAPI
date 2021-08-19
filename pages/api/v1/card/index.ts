@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	switch (method) {
 		case "GET":
-			// Initialise query params and check if they exist
+			// Initialise query params and check for undefined. If undefined, set to defaults.
 			let categoryParam = (category as string) ? category : CATEGORY.all;
 			let difficultyParam = (difficulty as string)
 				? difficulty
@@ -20,6 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				? Number.parseInt(noItemsPerCard as string)
 				: 5;
 
+			// Check if params are already arrays, else convert to arrays with split.
 			const finalCategoryParam: string[] =
 				typeof categoryParam === "string"
 					? categoryParam.split(",")
@@ -31,8 +32,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			const card: Card = getCard(
 				noItemsPerCardParam,
-				finalCategoryParam,
-				finalDifficultyParam
+				finalCategoryParam as CATEGORY[],
+				finalDifficultyParam as DIFFICULTY[]
 			);
 
 			res.status(200).json({
