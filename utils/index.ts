@@ -17,10 +17,10 @@ export const getItems = (
 	let cardItems: Item[] = [];
 
 	const itemCategories = items.map((i) => i.categories.join(","));
-	let itemDiffs: Item[] = items.filter((i) =>
+	const itemDiffs: Item[] = items.filter((i) =>
 		difficulties.includes(i.difficulty)
 	);
-	let itemDifficulties: string[] = itemDiffs.map((i) => i.difficulty);
+	const itemDifficulties: string[] = itemDiffs.map((i) => i.difficulty);
 
 	// First check if a list matching the requirements can be generated.
 	if (
