@@ -3,6 +3,7 @@ export enum CATEGORY {
 	tech = "tech",
 	places = "places",
 	kids = "kids",
+	music = "music",
 	all = "all",
 }
 
