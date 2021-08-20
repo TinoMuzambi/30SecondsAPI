@@ -14,17 +14,17 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 
 ## Categories
 
-- Cars
-- Celebrities
+- Cars ™
+- Celebrities ™
 - General Knowledge
-- Places
-- Tech: Phones & Laptops and stuff.
-- Animals
+- Places ™
+- Tech: Phones & Laptops and stuff. ™
+- Animals ™
 - Politicians
 - Historians
 - Occupations
 - TV
-- Music
+- Music ™
 - Nature (Mountains and rivers and oceans and all those stuff and famous lakes and famous rocks)
 - Bible
 - Diseases/Conditions
@@ -32,4 +32,4 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Science Events (Apollo 11)
 - Natural Disasters Names
 - Kids
-- Sport
+- Sport ™
