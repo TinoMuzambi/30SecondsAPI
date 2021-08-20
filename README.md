@@ -18,16 +18,17 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Celebrities
 - General Knowledge
 - Places
-- Phones
+- Tech: Phones & Laptops and stuff.
 - Animals
 - Politicians
 - Historians
 - Occupations
 - TV
 - Music
-- Nature (Nsovo says mountains and rivers and oceans and all those stuff and famous lakes and famours rocks)
+- Nature (Mountains and rivers and oceans and all those stuff and famous lakes and famous rocks)
 - Bible
 - Diseases/Conditions
 - Scientists
 - Science Events (Apollo 11)
 - Natural Disasters Names
+- Kids
