@@ -32,3 +32,4 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Science Events (Apollo 11)
 - Natural Disasters Names
 - Kids
+- Sport

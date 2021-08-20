@@ -6,6 +6,8 @@ export enum CATEGORY {
 	music = "music",
 	science = "science",
 	animals = "animals",
+	nature = "nature",
+	celebrities = "celebrities",
 	all = "all",
 }
 
