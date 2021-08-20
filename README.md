@@ -23,7 +23,7 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Politicians
 - Historians
 - Occupations
-- TV
+- TV ™
 - Music ™
 - Nature (Mountains and rivers and oceans and all those stuff and famous lakes and famous rocks)
 - Bible

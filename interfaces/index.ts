@@ -9,6 +9,7 @@ export enum CATEGORY {
 	nature = "nature",
 	celebrities = "celebrities",
 	sports = "sports",
+	tv = "tv",
 	all = "all",
 }
 
