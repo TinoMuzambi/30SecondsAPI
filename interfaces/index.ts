@@ -1,6 +1,7 @@
 export enum CATEGORY {
 	cars = "cars",
 	tech = "tech",
+	places = "places",
 	all = "all",
 }
 
