@@ -5,6 +5,7 @@ export enum CATEGORY {
 	kids = "kids",
 	music = "music",
 	science = "science",
+	animals = "animals",
 	all = "all",
 }
 
