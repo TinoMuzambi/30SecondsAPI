@@ -11,12 +11,13 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Need LOTS of data.
 - Single endpoint with query params.
 - Use DB or local file?
+- Add blacklist flag.
 
 ## Categories
 
 - Cars ™
 - Celebrities ™
-- General Knowledge
+- General Knowledge ™
 - Places ™
 - Tech: Phones & Laptops and stuff. ™
 - Animals ™

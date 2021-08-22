@@ -12,6 +12,7 @@ export enum CATEGORY {
 	tv = "tv",
 	politics = "politics",
 	bible = "bible",
+	generalKnowledge = "general-knowledge",
 	all = "all",
 }
 
