@@ -4,7 +4,17 @@ import { BASE_URL, Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
 // Return the intersection between two arrays.
 export const intersection = (array1: any[], array2: any[]): any[] => {
-	return array1.filter((value) => array2.includes(value));
+	let res: any[] = [];
+
+	array1.forEach((val: any[]) => {
+		for (let i = 0; i < val.length; i++) {
+			for (let j = 0; j < array2.length; j++) {
+				if (val[i] === array2[j]) res.push(val);
+			}
+		}
+	});
+
+	return res;
 };
 
 // Return true if item is already in list, else false.
@@ -41,7 +51,7 @@ export const getItems = async (
 
 	// Generate lists to facilitate checking requirements.
 	// List of all categories.
-	const itemCategories = items.map((i) => i.categories.join(","));
+	const itemCategories = items.map((i) => i.categories.join(",").split(","));
 
 	// List of difficulties that match requirements.
 	let itemDifficulties: string[];
@@ -54,11 +64,13 @@ export const getItems = async (
 		itemDifficulties = itemDiffs.map((i) => i.difficulty);
 	}
 
+	console.log({ itemDifficulties });
+
 	// First check if a list matching the requirements can be generated.
 	if (
 		(intersection(itemCategories, categories).length >= noItems ||
 			categories[0] === CATEGORY.all) &&
-		itemDifficulties.length >= noItems
+		(itemDifficulties.length >= noItems || difficulties[0] === DIFFICULTY.all)
 	) {
 		// While items less than requested number of items.
 		while (cardItems.length < noItems) {
