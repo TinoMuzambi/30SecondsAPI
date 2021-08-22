@@ -64,6 +64,7 @@ export const getItems = async (
 		itemDifficulties = itemDiffs.map((i) => i.difficulty);
 	}
 
+	// Convert categories into array in array format.
 	let cat: any[] = [...categories];
 	cat = cat.map((i) => i.split(","));
 
@@ -80,11 +81,8 @@ export const getItems = async (
 
 			// If item matches requiremenets, push it to the list.
 
-			console.log(currItem);
-			console.log(intersection(cat, currItem.categories));
-			console.log(intersection(cat, currItem.categories) != []);
 			if (
-				(intersection(cat, currItem.categories) !== [] ||
+				(intersection(cat, currItem.categories).length >= 1 ||
 					categories[0] === CATEGORY.all) &&
 				(difficulties.includes(currItem.difficulty) ||
 					difficulties[0] === DIFFICULTY.all)
