@@ -5,12 +5,18 @@ import db from "../../../../utils/dbConnect";
 
 const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	db();
-	const { method } = req;
+	const {
+		method,
+		query: { categories, difficulties },
+	} = req;
 
 	switch (method) {
 		case "GET":
 			try {
-				const items: typeof Item[] = await Item.find({});
+				const items: typeof Item[] = await Item.find({
+					categories: { $in: categories },
+					difficulty: { $in: difficulties },
+				});
 
 				res.status(200).json({ success: "true", data: items });
 			} catch (error) {
