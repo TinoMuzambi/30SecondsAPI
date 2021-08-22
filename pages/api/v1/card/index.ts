@@ -6,15 +6,15 @@ import { getCard } from "../../../../utils";
 const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	const {
 		method,
-		query: { category, noItemsPerCard, difficulty },
+		query: { categories, noItemsPerCard, difficulties },
 	} = req;
 
 	switch (method) {
 		case "GET":
 			// Initialise query params and check for undefined. If undefined, set to defaults.
-			let categoryParam = (category as string) ? category : CATEGORY.all;
-			let difficultyParam = (difficulty as string)
-				? difficulty
+			let categoryParam = (categories as string) ? categories : CATEGORY.all;
+			let difficultyParam = (difficulties as string)
+				? difficulties
 				: DIFFICULTY.all;
 			let noItemsPerCardParam = (noItemsPerCard as string)
 				? Number.parseInt(noItemsPerCard as string)
