@@ -29,12 +29,18 @@ export const isInList = (item: Item, items: Item[]): boolean => {
 };
 
 // Get items from database.
-export const getItemsFromDB = async (): Promise<Item[]> => {
-	const res = await fetch(`${BASE_URL}/api/v1/items`, {
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+export const getItemsFromDB = async (
+	categories: CATEGORY[],
+	difficulties: DIFFICULTY[]
+): Promise<Item[]> => {
+	const res = await fetch(
+		`${BASE_URL}/api/v1/items?categories=${categories}&difficulties=${difficulties}`,
+		{
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}
+	);
 	const data = await res.json();
 
 	return data.data;
@@ -46,7 +52,8 @@ export const getItems = async (
 	categories: CATEGORY[],
 	difficulties: DIFFICULTY[]
 ): Promise<Item[]> => {
-	const items: Item[] = await getItemsFromDB();
+	console.log({ categories, difficulties });
+	const items: Item[] = await getItemsFromDB(categories, difficulties);
 	let cardItems: Item[] = [];
 
 	// Generate lists to facilitate checking requirements.
