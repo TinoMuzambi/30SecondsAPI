@@ -2,21 +2,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import { BASE_URL, Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
-// Return the intersection between two arrays.
-export const intersection = (array1: any[], array2: any[]): any[] => {
-	let res: any[] = [];
-
-	array1.forEach((val: any[]) => {
-		for (let i = 0; i < val.length; i++) {
-			for (let j = 0; j < array2.length; j++) {
-				if (val[i] === array2[j]) res.push(val);
-			}
-		}
-	});
-
-	return res;
-};
-
 // Return true if item is already in list, else false.
 export const isInList = (item: Item, items: Item[]): boolean => {
 	let res = false;
@@ -55,25 +40,6 @@ export const getItems = async (
 	const items: Item[] = await getItemsFromDB(categories, difficulties);
 	console.log({ items });
 	let cardItems: Item[] = [];
-
-	// // Generate lists to facilitate checking requirements.
-	// // List of all categories.
-	// const itemCategories = items?.map((i) => i.categories.join(",").split(","));
-
-	// // List of difficulties that match requirements.
-	// let itemDifficulties: string[];
-	// if (difficulties[0] === DIFFICULTY.all) {
-	// 	itemDifficulties = items.map((i) => i.difficulty);
-	// } else {
-	// 	const itemDiffs: Item[] = items.filter((i) =>
-	// 		difficulties.includes(i.difficulty)
-	// 	);
-	// 	itemDifficulties = itemDiffs.map((i) => i.difficulty);
-	// }
-
-	// // Convert categories into array in array format.
-	// let cat: any[] = [...categories];
-	// cat = cat.map((i) => i.split(","));
 
 	// First check if a list matching the requirements can be generated.
 	if (items.length >= noItems) {

@@ -14,10 +14,11 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (method) {
 		case "GET":
 			try {
+				// Parse query params into desired format for mongo query.
 				const categoriesParam = (categories as string).split(",");
 				const difficultiesParam = (difficulties as string).split(",");
-				console.log({ categoriesParam, difficultiesParam });
 
+				// Get items depending on specified query params.
 				const items: typeof Item[] =
 					categoriesParam[0] === CATEGORY.all
 						? difficultiesParam[0] === DIFFICULTY.all
