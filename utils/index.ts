@@ -52,8 +52,8 @@ export const getItems = async (
 	categories: CATEGORY[],
 	difficulties: DIFFICULTY[]
 ): Promise<Item[]> => {
-	console.log({ categories, difficulties });
 	const items: Item[] = await getItemsFromDB(categories, difficulties);
+	console.log({ items });
 	let cardItems: Item[] = [];
 
 	// // Generate lists to facilitate checking requirements.

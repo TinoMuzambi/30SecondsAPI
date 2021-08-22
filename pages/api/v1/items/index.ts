@@ -14,20 +14,24 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (method) {
 		case "GET":
 			try {
+				const categoriesParam = (categories as string).split(",");
+				const difficultiesParam = (difficulties as string).split(",");
+				console.log({ categoriesParam, difficultiesParam });
+
 				const items: typeof Item[] =
-					categories[0] === CATEGORY.all
-						? difficulties[0] === DIFFICULTY.all
+					categoriesParam[0] === CATEGORY.all
+						? difficultiesParam[0] === DIFFICULTY.all
 							? await Item.find({})
 							: await Item.find({
-									difficulty: { $in: difficulties },
+									difficulty: { $in: difficultiesParam },
 							  })
-						: difficulties[0] === DIFFICULTY.all
+						: difficultiesParam[0] === DIFFICULTY.all
 						? await Item.find({
-								categories: { $in: categories },
+								categories: { $in: categoriesParam },
 						  })
 						: await Item.find({
-								categories: { $in: categories },
-								difficulty: { $in: difficulties },
+								categories: { $in: categoriesParam },
+								difficulty: { $in: difficultiesParam },
 						  });
 
 				res.status(200).json({ success: "true", data: items });
