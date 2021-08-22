@@ -51,7 +51,7 @@ export const getItems = async (
 
 	// Generate lists to facilitate checking requirements.
 	// List of all categories.
-	const itemCategories = items.map((i) => i.categories.join(",").split(","));
+	const itemCategories = items?.map((i) => i.categories.join(",").split(","));
 
 	// List of difficulties that match requirements.
 	let itemDifficulties: string[];
@@ -64,7 +64,8 @@ export const getItems = async (
 		itemDifficulties = itemDiffs.map((i) => i.difficulty);
 	}
 
-	console.log({ itemDifficulties });
+	let cat: any[] = [...categories];
+	cat = cat.map((i) => i.split(","));
 
 	// First check if a list matching the requirements can be generated.
 	if (
@@ -78,12 +79,18 @@ export const getItems = async (
 			const currItem = items[rand];
 
 			// If item matches requiremenets, push it to the list.
+
+			console.log(currItem);
+			console.log(intersection(cat, currItem.categories));
+			console.log(intersection(cat, currItem.categories) != []);
 			if (
-				(intersection(categories, currItem.categories) !== [] ||
+				(intersection(cat, currItem.categories) !== [] ||
 					categories[0] === CATEGORY.all) &&
 				(difficulties.includes(currItem.difficulty) ||
 					difficulties[0] === DIFFICULTY.all)
 			) {
+				// console.log(currItem);
+				// Only push if it's not already in the list.
 				if (!isInList(currItem, cardItems)) {
 					cardItems.push(currItem);
 				}
