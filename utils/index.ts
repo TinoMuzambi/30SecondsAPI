@@ -56,47 +56,35 @@ export const getItems = async (
 	const items: Item[] = await getItemsFromDB(categories, difficulties);
 	let cardItems: Item[] = [];
 
-	// Generate lists to facilitate checking requirements.
-	// List of all categories.
-	const itemCategories = items?.map((i) => i.categories.join(",").split(","));
+	// // Generate lists to facilitate checking requirements.
+	// // List of all categories.
+	// const itemCategories = items?.map((i) => i.categories.join(",").split(","));
 
-	// List of difficulties that match requirements.
-	let itemDifficulties: string[];
-	if (difficulties[0] === DIFFICULTY.all) {
-		itemDifficulties = items.map((i) => i.difficulty);
-	} else {
-		const itemDiffs: Item[] = items.filter((i) =>
-			difficulties.includes(i.difficulty)
-		);
-		itemDifficulties = itemDiffs.map((i) => i.difficulty);
-	}
+	// // List of difficulties that match requirements.
+	// let itemDifficulties: string[];
+	// if (difficulties[0] === DIFFICULTY.all) {
+	// 	itemDifficulties = items.map((i) => i.difficulty);
+	// } else {
+	// 	const itemDiffs: Item[] = items.filter((i) =>
+	// 		difficulties.includes(i.difficulty)
+	// 	);
+	// 	itemDifficulties = itemDiffs.map((i) => i.difficulty);
+	// }
 
-	// Convert categories into array in array format.
-	let cat: any[] = [...categories];
-	cat = cat.map((i) => i.split(","));
+	// // Convert categories into array in array format.
+	// let cat: any[] = [...categories];
+	// cat = cat.map((i) => i.split(","));
 
 	// First check if a list matching the requirements can be generated.
-	if (
-		(intersection(itemCategories, categories).length >= noItems ||
-			categories[0] === CATEGORY.all) &&
-		(itemDifficulties.length >= noItems || difficulties[0] === DIFFICULTY.all)
-	) {
+	if (items.length >= noItems) {
 		// While items less than requested number of items.
 		while (cardItems.length < noItems) {
 			const rand = Math.floor(Math.random() * items.length);
 			const currItem = items[rand];
 
-			// If item matches requiremenets, push it to the list.
-			if (
-				(intersection(cat, currItem.categories).length >= 1 ||
-					categories[0] === CATEGORY.all) &&
-				(difficulties.includes(currItem.difficulty) ||
-					difficulties[0] === DIFFICULTY.all)
-			) {
-				// Only push if it's not already in the list.
-				if (!isInList(currItem, cardItems)) {
-					cardItems.push(currItem);
-				}
+			// Only push if it's not already in the list.
+			if (!isInList(currItem, cardItems)) {
+				cardItems.push(currItem);
 			}
 		}
 	}
