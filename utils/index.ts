@@ -80,14 +80,12 @@ export const getItems = async (
 			const currItem = items[rand];
 
 			// If item matches requiremenets, push it to the list.
-
 			if (
 				(intersection(cat, currItem.categories).length >= 1 ||
 					categories[0] === CATEGORY.all) &&
 				(difficulties.includes(currItem.difficulty) ||
 					difficulties[0] === DIFFICULTY.all)
 			) {
-				// console.log(currItem);
 				// Only push if it's not already in the list.
 				if (!isInList(currItem, cardItems)) {
 					cardItems.push(currItem);
