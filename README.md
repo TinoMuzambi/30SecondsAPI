@@ -21,15 +21,12 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Tech: Phones & Laptops and stuff. ™
 - Animals ™
 - Politics ™
-- Historians
 - Occupations
 - TV ™
 - Music ™
-- Nature (Mountains and rivers and oceans and all those stuff and famous lakes and famous rocks)
-- Bible
+- Nature (Mountains and rivers and oceans and all those stuff and famous lakes and famous rocks) ™
+- Bible ™
 - Diseases/Conditions
-- Scientists
-- Science Events (Apollo 11)
-- Natural Disasters Names
+- Scientists & Science Events (Apollo 11) ™
 - Kids
 - Sport ™
