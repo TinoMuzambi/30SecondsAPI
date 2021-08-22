@@ -20,7 +20,7 @@ Your go to API for a fun jam-packed online game of 30 seconds.
 - Places ™
 - Tech: Phones & Laptops and stuff. ™
 - Animals ™
-- Politicians
+- Politics ™
 - Historians
 - Occupations
 - TV ™
