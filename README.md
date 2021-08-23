@@ -1,6 +1,7 @@
 # 30 Seconds API
 
 Your go to API for a fun jam-packed online game of 30 seconds.
+Play a 30 Seconds-like game by using this API which provides you with "cards" with items to describe to your teammates.
 
 ## Roadmap
 

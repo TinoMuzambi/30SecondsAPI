@@ -38,7 +38,7 @@ export const getItems = async (
 	difficulties: DIFFICULTY[]
 ): Promise<Item[]> => {
 	const items: Item[] = await getItemsFromDB(categories, difficulties);
-	console.log({ items });
+	({ items });
 	let cardItems: Item[] = [];
 
 	// First check if a list matching the requirements can be generated.
