@@ -42,6 +42,12 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 				finalDifficultyParam as DIFFICULTY[]
 			);
 
+			if (card.items.length === 0) {
+				return res
+					.status(500)
+					.json({ success: false, message: "Please try again" });
+			}
+
 			res.status(200).json({
 				success: "true",
 				data: { card },
