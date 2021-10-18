@@ -25,6 +25,7 @@ export const getItemsFromDB = async (
 	const res = await fetch(
 		`${BASE_URL}/api/v1/items?categories=${categories}&difficulties=${difficulties}`,
 		{
+			retryOn: [400, 500, 404],
 			headers: {
 				"Content-Type": "application/json",
 			},
