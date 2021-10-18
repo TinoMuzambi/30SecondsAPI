@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
+import originalFetch from "isomorphic-fetch";
+import fetchRetry from "fetch-retry";
 
 import { BASE_URL, Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
+
+const fetch = fetchRetry(originalFetch);
 
 // Return true if item is already in list, else false.
 export const isInList = (item: Item, items: Item[]): boolean => {
