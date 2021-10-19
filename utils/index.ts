@@ -6,7 +6,12 @@ import { BASE_URL, Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 
 const fetch = fetchRetry(originalFetch);
 
-// Return true if item is already in list, else false.
+/**
+ * Determine whehter one item is already in the list or not.
+ * @param {Item} item Item being checked for.
+ * @param {Item[]} items List of items to check from
+ * @returns {boolean} True if item is already in list, else false.
+ */
 export const isInList = (item: Item, items: Item[]): boolean => {
 	let res = false;
 
@@ -17,7 +22,12 @@ export const isInList = (item: Item, items: Item[]): boolean => {
 	return res;
 };
 
-// Get items from database.
+/**
+ * Get all items from database with the given criteria.
+ * @param {CATEGORY[]} categories Restrict items to a certain category/categories.
+ * @param {DIFFICULTY[]} difficulties Restrict items to a certain difficulty/difficulties.
+ * @returns {Item[]} A list of all items in the database that match the given criteria.
+ */
 export const getItemsFromDB = async (
 	categories: CATEGORY[],
 	difficulties: DIFFICULTY[]
@@ -36,7 +46,13 @@ export const getItemsFromDB = async (
 	return data.data;
 };
 
-// Get items that match number of items, difficulty and category.
+/**
+ * Gets items that match number of items, difficulty and category.
+ * @param {number} noItems Number of items per card.
+ * @param {CATEGORY[]} categories Restrict items to a certain category/categories.
+ * @param {DIFFICULTY[]} difficulties Restrict items to a certain difficulty.
+ * @returns {Item[]} A list of limited items matching the criteria.
+ */
 export const getItems = async (
 	noItems: number,
 	categories: CATEGORY[],
@@ -63,7 +79,13 @@ export const getItems = async (
 	return cardItems;
 };
 
-// Get a card that matches number of items, difficulty and category.
+/**
+ * Gets a card that matches number of items, difficulty and category.
+ * @param {number} noItems Number of items per card.
+ * @param {CATEGORY[]} categories Restrict items to a certain category/categories.
+ * @param {DIFFICULTY[]} difficulties Restrict items to a certain difficulty.
+ * @returns {Card} A card with the number of items, difficulty and category given.
+ */
 export const getCard = async (
 	noItems: number,
 	categories: CATEGORY[],
