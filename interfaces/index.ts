@@ -1,3 +1,6 @@
+/**
+ * Enum of all the item categories.
+ */
 export enum CATEGORY {
 	cars = "cars",
 	tech = "tech",
@@ -16,6 +19,9 @@ export enum CATEGORY {
 	all = "all",
 }
 
+/**
+ * Enum of all the item difficulties
+ */
 export enum DIFFICULTY {
 	easy = "easy",
 	medium = "medium",
@@ -23,11 +29,17 @@ export enum DIFFICULTY {
 	all = "all",
 }
 
+/**
+ * Base url encoded for the right environment.
+ */
 export const BASE_URL =
 	process.env.NODE_ENV === "production"
 		? "https://30-seconds-api.vercel.app"
 		: "http://localhost:3000";
 
+/**
+ * One item on a card.
+ */
 export interface Item {
 	_id: string;
 	id: string;
@@ -37,6 +49,9 @@ export interface Item {
 	clue: string;
 }
 
+/**
+ * A 30 seconds card which can have multiple items of given difficulties and categories.
+ */
 export interface Card {
 	id: string;
 	difficulties: DIFFICULTY[];
