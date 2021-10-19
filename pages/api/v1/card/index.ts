@@ -49,7 +49,7 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 
 			res.status(200).json({
-				success: "true",
+				success: true,
 				data: { card },
 			});
 			break;

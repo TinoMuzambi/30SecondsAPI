@@ -35,23 +35,24 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 								difficulty: { $in: difficultiesParam },
 						  });
 				if (items.length === 0) {
+					console.log(items);
 					return res
 						.status(500)
 						.json({ success: false, message: "Please try again" });
 				}
 
-				res.status(200).json({ success: "true", data: items });
+				res.status(200).json({ success: true, data: items });
 			} catch (error) {
-				res.status(400).json({ success: "false", data: error });
+				res.status(400).json({ success: false, data: error });
 			}
 			break;
 		case "POST":
 			try {
 				const item: typeof Item = await Item.create(req.body);
 
-				res.status(201).json({ success: "true", data: item });
+				res.status(201).json({ success: true, data: item });
 			} catch (error) {
-				res.status(400).json({ success: "false", data: error });
+				res.status(400).json({ success: false, data: error });
 			}
 			break;
 		case "PUT":
@@ -61,9 +62,9 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 					req.body
 				);
 
-				res.status(201).json({ success: "true", data: item });
+				res.status(201).json({ success: true, data: item });
 			} catch (error) {
-				res.status(400).json({ success: "false", data: error });
+				res.status(400).json({ success: false, data: error });
 			}
 			break;
 		default:

@@ -6,7 +6,7 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (method) {
 		case "GET":
 			res.status(200).json({
-				success: "true",
+				success: true,
 				data: "Hello! Welcome to the 30 Seconds API!",
 			});
 			break;
