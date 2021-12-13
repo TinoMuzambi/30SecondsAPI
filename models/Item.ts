@@ -8,7 +8,7 @@ const ItemSchema: Schema = new mongoose.Schema(
 			type: String,
 			required: [true, "Item needs an ID."],
 			trim: true,
-			unique: [true, "Item ID needs to be unique."],
+			unique: true,
 		},
 		difficulty: {
 			type: String,
@@ -25,7 +25,7 @@ const ItemSchema: Schema = new mongoose.Schema(
 		content: {
 			type: String,
 			required: [true, "Item needs content."],
-			unique: [true, "Item content needs to be unique."],
+			unique: true,
 			trim: true,
 		},
 		clue: {
