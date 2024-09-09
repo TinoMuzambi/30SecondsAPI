@@ -24,11 +24,11 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 			const finalCategoryParam: string[] =
 				typeof categoryParam === "string"
 					? categoryParam.split(",")
-					: categoryParam;
+					: (categoryParam as string[]);
 			const finalDifficultyParam: string[] =
 				typeof difficultyParam === "string"
 					? difficultyParam.split(",")
-					: difficultyParam;
+					: (difficultyParam as string[]);
 
 			// Validation
 			// Check that number of items per card isn't out of bounds.

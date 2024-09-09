@@ -19,7 +19,7 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 				const difficultiesParam = (difficulties as string).split(",");
 
 				// Get items depending on specified query params.
-				const items: typeof Item[] =
+				const items: (typeof Item)[] =
 					categoriesParam[0] === CATEGORY.all
 						? difficultiesParam[0] === DIFFICULTY.all
 							? await Item.find({})
@@ -57,10 +57,17 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 			break;
 		case "PUT":
 			try {
-				const item: typeof Item = await Item.findOneAndUpdate(
+				const item = await Item.findOneAndUpdate(
 					{ id: req.body.id },
-					req.body
+					req.body,
+					{ new: true }
 				);
+
+				if (!item) {
+					return res
+						.status(404)
+						.json({ success: false, message: "Item not found" });
+				}
 
 				res.status(201).json({ success: true, data: item });
 			} catch (error) {
