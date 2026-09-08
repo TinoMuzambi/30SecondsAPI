@@ -1,26 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
-import originalFetch from "isomorphic-fetch";
-import fetchRetry from "fetch-retry";
 
-import { BASE_URL, Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
-
-const fetch = fetchRetry(originalFetch);
-
-/**
- * Determine whehter one item is already in the list or not.
- * @param {Item} item Item being checked for.
- * @param {Item[]} items List of items to check from
- * @returns {boolean} True if item is already in list, else false.
- */
-export const isInList = (item: Item, items: Item[]): boolean => {
-	let res = false;
-
-	items.forEach((i) => {
-		if (i.id === item.id) res = true;
-	});
-
-	return res;
-};
+import { Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
+import fallbackItems from "../data/items";
+import ItemModel from "../models/Item";
+import dbConnect from "./dbConnect";
 
 /**
  * Get all items from database with the given criteria.
@@ -32,18 +15,39 @@ export const getItemsFromDB = async (
 	categories: CATEGORY[],
 	difficulties: DIFFICULTY[]
 ): Promise<Item[]> => {
-	const res = await fetch(
-		`${BASE_URL}/api/v1/items?categories=${categories}&difficulties=${difficulties}`,
-		{
-			retryOn: [400, 500, 404],
-			headers: {
-				"Content-Type": "application/json",
-			},
-		}
-	);
-	const data = await res.json();
+	const query = {
+		...(categories.includes(CATEGORY.all)
+			? {}
+			: { categories: { $in: categories } }),
+		...(difficulties.includes(DIFFICULTY.all)
+			? {}
+			: { difficulty: { $in: difficulties } }),
+	};
 
-	return data.data;
+	try {
+		await dbConnect();
+		const items = await ItemModel.find(query).lean();
+		if (items.length > 0) return items as Item[];
+	} catch (error) {
+		console.error("Database unavailable; using the bundled card catalogue", error);
+	}
+
+	return filterItems(fallbackItems, categories, difficulties);
+};
+
+export const filterItems = (
+	items: Item[],
+	categories: CATEGORY[],
+	difficulties: DIFFICULTY[]
+): Item[] => {
+	const allCategories = categories.includes(CATEGORY.all);
+	const allDifficulties = difficulties.includes(DIFFICULTY.all);
+
+	return items.filter(
+		(item) =>
+			(allCategories || item.categories.some((category) => categories.includes(category))) &&
+			(allDifficulties || difficulties.includes(item.difficulty))
+	);
 };
 
 /**
@@ -59,24 +63,17 @@ export const getItems = async (
 	difficulties: DIFFICULTY[]
 ): Promise<Item[]> => {
 	const items: Item[] = await getItemsFromDB(categories, difficulties);
-	({ items });
-	let cardItems: Item[] = [];
+	const shuffled = [...items];
 
-	// First check if a list matching the requirements can be generated.
-	if (items.length >= noItems) {
-		// While items less than requested number of items.
-		while (cardItems.length < noItems) {
-			const rand = Math.floor(Math.random() * items.length);
-			const currItem = items[rand];
-
-			// Only push if it's not already in the list.
-			if (!isInList(currItem, cardItems)) {
-				cardItems.push(currItem);
-			}
-		}
+	for (let index = shuffled.length - 1; index > 0; index -= 1) {
+		const randomIndex = Math.floor(Math.random() * (index + 1));
+		[shuffled[index], shuffled[randomIndex]] = [
+			shuffled[randomIndex],
+			shuffled[index],
+		];
 	}
 
-	return cardItems;
+	return shuffled.slice(0, noItems);
 };
 
 /**

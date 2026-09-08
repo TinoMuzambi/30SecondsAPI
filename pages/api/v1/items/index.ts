@@ -1,11 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { CATEGORY, DIFFICULTY } from "../../../../interfaces";
+import { CATEGORY, DIFFICULTY, Item as ItemType } from "../../../../interfaces";
 
 import Item from "../../../../models/Item";
 import db from "../../../../utils/dbConnect";
+import { getItemsFromDB } from "../../../../utils";
+import {
+	InvalidQueryError,
+	isWriteAuthorized,
+	parseFilters,
+} from "../../../../utils/request";
 
 const res = async (req: NextApiRequest, res: NextApiResponse) => {
-	db();
 	const {
 		method,
 		query: { categories, difficulties },
@@ -14,54 +19,54 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (method) {
 		case "GET":
 			try {
-				// Parse query params into desired format for mongo query.
-				const categoriesParam = (categories as string).split(",");
-				const difficultiesParam = (difficulties as string).split(",");
-
-				// Get items depending on specified query params.
-				const items: (typeof Item)[] =
-					categoriesParam[0] === CATEGORY.all
-						? difficultiesParam[0] === DIFFICULTY.all
-							? await Item.find({})
-							: await Item.find({
-									difficulty: { $in: difficultiesParam },
-							  })
-						: difficultiesParam[0] === DIFFICULTY.all
-						? await Item.find({
-								categories: { $in: categoriesParam },
-						  })
-						: await Item.find({
-								categories: { $in: categoriesParam },
-								difficulty: { $in: difficultiesParam },
-						  });
-				if (items.length === 0) {
-					console.log(items);
-					return res
-						.status(500)
-						.json({ success: false, message: "Please try again" });
+				const filters = parseFilters({ categories, difficulties });
+				const items = await getItemsFromDB(
+					filters.categories,
+					filters.difficulties
+				);
+				return res.status(200).json({ success: true, data: items });
+			} catch (error) {
+				if (error instanceof InvalidQueryError) {
+					return res.status(400).json({ success: false, message: error.message });
 				}
-
-				res.status(200).json({ success: true, data: items });
-			} catch (error) {
-				res.status(400).json({ success: false, data: error });
+				return res.status(500).json({ success: false, message: "Unable to load items" });
 			}
-			break;
 		case "POST":
-			try {
-				const item: typeof Item = await Item.create(req.body);
-
-				res.status(201).json({ success: true, data: item });
-			} catch (error) {
-				res.status(400).json({ success: false, data: error });
-			}
-			break;
 		case "PUT":
 			try {
-				const item = await Item.findOneAndUpdate(
-					{ id: req.body.id },
-					req.body,
-					{ new: true }
-				);
+				if (!isWriteAuthorized(req.headers.authorization)) {
+					return res.status(403).json({
+						success: false,
+						message: "Item writes are disabled or unauthorized",
+					});
+				}
+
+				const body = req.body as Partial<ItemType>;
+				if (
+					typeof body.id !== "string" ||
+					typeof body.content !== "string" ||
+					typeof body.clue !== "string" ||
+					!Object.values(DIFFICULTY).includes(body.difficulty as DIFFICULTY) ||
+					body.difficulty === DIFFICULTY.all ||
+					!Array.isArray(body.categories) ||
+					body.categories.length === 0 ||
+					body.categories.some(
+						(category) =>
+							category === CATEGORY.all ||
+							!Object.values(CATEGORY).includes(category as CATEGORY)
+					)
+				) {
+					return res.status(400).json({ success: false, message: "Invalid item" });
+				}
+
+				await db();
+				const item =
+					method === "POST"
+						? await Item.create(body)
+						: await Item.findOneAndUpdate({ id: body.id }, body, {
+								new: true,
+								runValidators: true,
+						  });
 
 				if (!item) {
 					return res
@@ -69,13 +74,13 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 						.json({ success: false, message: "Item not found" });
 				}
 
-				res.status(201).json({ success: true, data: item });
+				return res.status(method === "POST" ? 201 : 200).json({ success: true, data: item });
 			} catch (error) {
-				res.status(400).json({ success: false, data: error });
+				return res.status(400).json({ success: false, message: "Unable to save item" });
 			}
-			break;
 		default:
-			return res.status(400).json({ success: false });
+			res.setHeader("Allow", "GET, POST, PUT");
+			return res.status(405).json({ success: false });
 	}
 };
 
