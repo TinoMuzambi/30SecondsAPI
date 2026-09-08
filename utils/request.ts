@@ -61,6 +61,7 @@ export const isWriteAuthorized = (
 	const providedBuffer = encoder.encode(providedSecret);
 	const configuredBuffer = encoder.encode(configuredSecret);
 	return (
+		configuredBuffer.length >= 32 &&
 		providedBuffer.length === configuredBuffer.length &&
 		timingSafeEqual(providedBuffer, configuredBuffer)
 	);

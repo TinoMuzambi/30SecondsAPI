@@ -32,10 +32,12 @@ test("parseFilters rejects invalid values and counts", () => {
 });
 
 test("writes are disabled by default and require an exact bearer secret", () => {
+	const strongSecret = "0123456789abcdef0123456789abcdef";
 	assert.equal(isWriteAuthorized("Bearer secret", undefined), false);
 	assert.equal(isWriteAuthorized("Bearer wrong", "secret"), false);
 	assert.equal(isWriteAuthorized("secret", "secret"), false);
-	assert.equal(isWriteAuthorized("Bearer secret", "secret"), true);
+	assert.equal(isWriteAuthorized("Bearer secret", "secret"), false);
+	assert.equal(isWriteAuthorized(`Bearer ${strongSecret}`, strongSecret), true);
 });
 
 test("the bundled catalogue applies category and difficulty filters", () => {

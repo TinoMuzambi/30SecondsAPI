@@ -13,9 +13,9 @@ Play a 30 Seconds-like game by using this API which provides you with "cards" wi
 
 The bundled catalogue keeps reads available when MongoDB is not configured or
 temporarily unavailable. Set `MONGO_URI` to use the database-backed catalogue.
-Item writes are disabled by default. To deliberately enable them, set a strong
-`ITEMS_WRITE_SECRET` and send it as `Authorization: Bearer <secret>` on POST or
-PUT requests.
+Item writes are disabled by default. To deliberately enable them, set a random
+`ITEMS_WRITE_SECRET` of at least 32 bytes and send it as
+`Authorization: Bearer <secret>` on POST or PUT requests.
 
 The current runtime requires Node.js 20.19 or newer.
 
