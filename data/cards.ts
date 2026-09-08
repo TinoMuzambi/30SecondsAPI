@@ -1,10 +1,10 @@
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "crypto";
 
 import { Card, Item, CATEGORY, DIFFICULTY } from "../interfaces";
 
 const cards: Card[] = [
 	{
-		id: uuidv4(),
+		id: randomUUID(),
 		categories: [CATEGORY.cars],
 		difficulties: [DIFFICULTY.all],
 		items: [],

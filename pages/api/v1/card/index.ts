@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { Card, CATEGORY, DIFFICULTY } from "../../../../interfaces";
+import { Card } from "../../../../interfaces";
 import { getCard } from "../../../../utils";
+import { InvalidQueryError, parseFilters } from "../../../../utils/request";
 
 const res = async (req: NextApiRequest, res: NextApiResponse) => {
 	const {
@@ -11,50 +12,32 @@ const res = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	switch (method) {
 		case "GET":
-			// Initialise query params and check for undefined. If undefined, set to defaults.
-			let categoryParam = (categories as string) ? categories : CATEGORY.all;
-			let difficultyParam = (difficulties as string)
-				? difficulties
-				: DIFFICULTY.all;
-			let noItemsPerCardParam = (noItemsPerCard as string)
-				? Number.parseInt(noItemsPerCard as string)
-				: 5;
+			try {
+				const filters = parseFilters({ categories, difficulties, noItemsPerCard });
+				const card: Card = await getCard(
+					filters.noItemsPerCard,
+					filters.categories,
+					filters.difficulties
+				);
 
-			// Check if params are already arrays, else convert to arrays with split.
-			const finalCategoryParam: string[] =
-				typeof categoryParam === "string"
-					? categoryParam.split(",")
-					: (categoryParam as string[]);
-			const finalDifficultyParam: string[] =
-				typeof difficultyParam === "string"
-					? difficultyParam.split(",")
-					: (difficultyParam as string[]);
+				if (card.items.length < filters.noItemsPerCard) {
+					return res.status(422).json({
+						success: false,
+						message: `Only ${card.items.length} matching items are available`,
+					});
+				}
 
-			// Validation
-			// Check that number of items per card isn't out of bounds.
-			if (noItemsPerCardParam > 10) noItemsPerCardParam = 10;
-			else if (noItemsPerCardParam < 1) noItemsPerCardParam = 5;
-
-			// Generate card.
-			const card: Card = await getCard(
-				noItemsPerCardParam,
-				finalCategoryParam as CATEGORY[],
-				finalDifficultyParam as DIFFICULTY[]
-			);
-
-			if (card.items.length === 0) {
-				return res
-					.status(500)
-					.json({ success: false, message: "Please try again" });
+				return res.status(200).json({ success: true, data: { card } });
+			} catch (error) {
+				if (error instanceof InvalidQueryError) {
+					return res.status(400).json({ success: false, message: error.message });
+				}
+				console.error(error);
+				return res.status(500).json({ success: false, message: "Unable to build card" });
 			}
-
-			res.status(200).json({
-				success: true,
-				data: { card },
-			});
-			break;
 		default:
-			return res.status(400).json({ success: false });
+			res.setHeader("Allow", "GET");
+			return res.status(405).json({ success: false });
 	}
 };
 
