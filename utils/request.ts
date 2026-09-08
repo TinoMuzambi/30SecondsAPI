@@ -57,8 +57,9 @@ export const isWriteAuthorized = (
 	if (!configuredSecret || !authorizationHeader?.startsWith("Bearer ")) return false;
 
 	const providedSecret = authorizationHeader.slice("Bearer ".length);
-	const providedBuffer = Buffer.from(providedSecret);
-	const configuredBuffer = Buffer.from(configuredSecret);
+	const encoder = new TextEncoder();
+	const providedBuffer = encoder.encode(providedSecret);
+	const configuredBuffer = encoder.encode(configuredSecret);
 	return (
 		providedBuffer.length === configuredBuffer.length &&
 		timingSafeEqual(providedBuffer, configuredBuffer)

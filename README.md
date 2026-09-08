@@ -17,6 +17,8 @@ Item writes are disabled by default. To deliberately enable them, set a strong
 `ITEMS_WRITE_SECRET` and send it as `Authorization: Bearer <secret>` on POST or
 PUT requests.
 
+The current runtime requires Node.js 20.19 or newer.
+
 ## Development
 
 ```bash

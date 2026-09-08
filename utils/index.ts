@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "crypto";
 
 import { Card, CATEGORY, DIFFICULTY, Item } from "../interfaces";
 import fallbackItems from "../data/items";
@@ -93,7 +93,7 @@ export const getCard = async (
 
 	// Generate card.
 	const card: Card = {
-		id: uuidv4(),
+		id: randomUUID(),
 		categories: categories,
 		difficulties: difficulties,
 		items: cardItems,
